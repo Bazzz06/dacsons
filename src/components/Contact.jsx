@@ -82,7 +82,6 @@ export default function Contact() {
             >
               contact@dacsons.fr
             </a>
-            <p className="text-sm text-paper/50">504 Chemin de la Colle Supérieure · 06500 Menton</p>
           </div>
         </Reveal>
 
