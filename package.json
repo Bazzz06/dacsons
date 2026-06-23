@@ -9,6 +9,7 @@
     "preview": "vite preview --host"
   },
   "dependencies": {
+    "@paper-design/shaders-react": "^0.0.76",
     "framer-motion": "^11.11.17",
     "lenis": "^1.1.18",
     "react": "^18.3.1",
