@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f3f2ee;
+  --ink: #070a14;
+  --navy: #16244d;
+  --sky: #5bc3ef;
+  --racing: #e11d2a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  /* Le canvas WebGL couvre le fond ; paper = état "clair" avant montage. */
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Satoshi', system-ui, -apple-system, sans-serif;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: 'Clash Display', system-ui, sans-serif;
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--racing);
+  color: #fff;
+}
+
+/* ---------- Lenis (smooth scroll) ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ---------- Fond de secours (sous le canvas WebGL) ---------- */
+.page-underlay {
+  position: fixed;
+  inset: 0;
+  z-index: -20;
+  background: var(--paper);
+  transition: background-color 0.9s var(--ease, ease);
+}
+.page-underlay.is-dark {
+  background: var(--ink);
+}
+
+/* ---------- Curseur d'accent (desktop) ---------- */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  transition: width 0.3s var(--ease, ease), height 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease, opacity 0.3s ease;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+.cursor-ring.is-hover {
+  width: 66px;
+  height: 66px;
+  background: rgba(255, 255, 255, 0.12);
+}
+.cursor-ring.is-down {
+  width: 24px;
+  height: 24px;
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* ---------- Helpers ---------- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.text-stroke {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
+}
+
+/* Bandes Martini en filet décoratif */
+.martini-bars {
+  background-image: linear-gradient(
+    90deg,
+    var(--sky) 0 14%,
+    transparent 14% 28%,
+    var(--navy) 28% 42%,
+    transparent 42% 56%,
+    var(--racing) 56% 70%,
+    transparent 70% 84%,
+    var(--sky) 84% 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
