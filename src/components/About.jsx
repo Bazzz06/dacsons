@@ -2,19 +2,19 @@ import Reveal from './ui/Reveal'
 
 const people = [
   {
-    initials: 'JC',
+    n: '01',
     name: 'Jacky Caillé',
     role: 'Le père — Expert-comptable',
     line: 'La rigueur comptable et le sens du temps long.',
   },
   {
-    initials: 'BC',
+    n: '02',
     name: 'Basile Caillé',
     role: 'Consultant & expert logiciel',
     line: "Le conseil et la technologie, au service de l'exécution.",
   },
   {
-    initials: 'TC',
+    n: '03',
     name: 'Théo Caillé',
     role: 'Expert financier — Fusions-acquisitions',
     line: "La finance d'entreprise et les opérations de croissance.",
@@ -43,20 +43,16 @@ export default function About() {
           </p>
         </Reveal>
 
-        <div className="grid gap-6 md:grid-cols-3 md:gap-8">
+        <div className="grid gap-5 md:grid-cols-3 md:gap-6">
           {people.map((p, i) => (
-            <Reveal key={p.initials} delay={i * 0.1}>
-              <article className="group h-full overflow-hidden rounded-2xl border border-paper/10 bg-paper/[0.03] p-5 transition-colors duration-500 hover:border-paper/25 md:p-6">
-                <div className="relative mb-6 aspect-[4/5] overflow-hidden rounded-xl bg-gradient-to-br from-navy/60 to-ink">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-7xl text-paper/20 transition-transform duration-700 ease-smooth group-hover:scale-110">
-                      {p.initials}
-                    </span>
-                  </div>
-                  <div className="martini-bars absolute bottom-0 left-0 h-2 w-full opacity-90" />
+            <Reveal key={p.n} delay={i * 0.1}>
+              <article className="group h-full rounded-xl border border-paper/10 bg-paper/[0.03] p-6 transition-colors duration-500 hover:border-paper/25 md:p-7">
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="font-display text-sm text-paper/40">{p.n}</span>
+                  <span className="martini-bars h-2 w-12 rounded-sm opacity-90" />
                 </div>
                 <h3 className="font-display text-2xl">{p.name}</h3>
-                <p className="mt-1 text-sm text-sky">{p.role}</p>
+                <p className="mt-1.5 text-sm text-sky">{p.role}</p>
                 <p className="mt-3 text-sm text-paper/55">{p.line}</p>
               </article>
             </Reveal>

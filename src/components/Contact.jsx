@@ -5,7 +5,7 @@ import Magnetic from './ui/Magnetic'
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
 
 const inputClass =
-  'w-full border-b border-paper/20 bg-transparent py-3 text-paper placeholder-paper/40 outline-none transition-colors duration-300 focus:border-sky'
+  'w-full rounded-lg border border-paper/20 bg-paper/[0.05] px-4 py-3.5 text-paper placeholder-paper/40 outline-none transition-colors duration-300 focus:border-sky focus:bg-paper/[0.08]'
 
 export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | success | error
@@ -109,7 +109,10 @@ export default function Contact() {
               </button>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="flex flex-col gap-6">
+            <form
+              onSubmit={onSubmit}
+              className="flex flex-col gap-5 rounded-2xl border border-paper/10 bg-paper/[0.02] p-6 md:p-8"
+            >
               {/* honeypot anti-spam */}
               <input
                 type="checkbox"
@@ -120,14 +123,14 @@ export default function Contact() {
               />
 
               <div>
-                <label htmlFor="name" className="mb-1 block text-xs uppercase tracking-[0.2em] text-paper/40">
+                <label htmlFor="name" className="mb-2 block text-xs uppercase tracking-[0.2em] text-paper/60">
                   Nom
                 </label>
                 <input id="name" name="name" type="text" required placeholder="Votre nom" className={inputClass} />
               </div>
 
               <div>
-                <label htmlFor="email" className="mb-1 block text-xs uppercase tracking-[0.2em] text-paper/40">
+                <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-[0.2em] text-paper/60">
                   Email
                 </label>
                 <input
@@ -141,7 +144,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-1 block text-xs uppercase tracking-[0.2em] text-paper/40">
+                <label htmlFor="message" className="mb-2 block text-xs uppercase tracking-[0.2em] text-paper/60">
                   Message
                 </label>
                 <textarea

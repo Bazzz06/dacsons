@@ -59,7 +59,7 @@ export default function Footer() {
             DACSONS — SAS au capital de 1 000 € · SIREN 893 343 871 · 504 Chemin de la Colle
             Supérieure, 06500 Menton
           </p>
-          <p>© {year} · Fait sur la Côte d'Azur</p>
+          <p>© {year} DACSONS</p>
         </div>
       </div>
     </footer>
