@@ -16,12 +16,10 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: auto;
 }
 
 body {
   margin: 0;
-  /* Le canvas WebGL couvre le fond ; paper = état "clair" avant montage. */
   background: var(--paper);
   color: var(--ink);
   font-family: 'Satoshi', system-ui, -apple-system, sans-serif;
@@ -42,6 +40,36 @@ body {
   color: #fff;
 }
 
+/* ---------- Fonds de section (clair / sombre, sobre) ---------- */
+[data-theme='light'] {
+  background-color: var(--paper);
+}
+[data-theme='dark'] {
+  background-color: var(--ink);
+}
+
+/* ---------- Notes Martini ---------- */
+/* fin liseré racing en haut de page */
+.martini-rule {
+  background: linear-gradient(
+    90deg,
+    var(--sky) 0 33.34%,
+    var(--navy) 33.34% 66.67%,
+    var(--racing) 66.67% 100%
+  );
+}
+/* petit groupe de bandes (eyebrows, cartes, footer) */
+.martini-bars {
+  background-image: linear-gradient(
+    90deg,
+    var(--sky) 0 30%,
+    transparent 30% 38%,
+    var(--navy) 38% 68%,
+    transparent 68% 76%,
+    var(--racing) 76% 100%
+  );
+}
+
 /* ---------- Lenis (smooth scroll) ---------- */
 html.lenis,
 html.lenis body {
@@ -60,71 +88,14 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* ---------- Fond de secours (sous le canvas WebGL) ---------- */
-.page-underlay {
-  position: fixed;
-  inset: 0;
-  z-index: -20;
-  background: var(--paper);
-  transition: background-color 0.9s var(--ease, ease);
-}
-.page-underlay.is-dark {
-  background: var(--ink);
-}
-
-/* ---------- Curseur d'accent (desktop) ---------- */
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 34px;
-  height: 34px;
-  border: 1.5px solid rgba(255, 255, 255, 0.55);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
-  transition: width 0.3s var(--ease, ease), height 0.3s ease, background-color 0.3s ease,
-    border-color 0.3s ease, opacity 0.3s ease;
-  mix-blend-mode: difference;
-  will-change: transform;
-}
-.cursor-ring.is-hover {
-  width: 66px;
-  height: 66px;
-  background: rgba(255, 255, 255, 0.12);
-}
-.cursor-ring.is-down {
-  width: 24px;
-  height: 24px;
-}
-@media (hover: none), (pointer: coarse) {
-  .cursor-ring {
-    display: none;
-  }
-}
-
 /* ---------- Helpers ---------- */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
 .text-stroke {
   -webkit-text-stroke: 1px currentColor;
   color: transparent;
 }
-
-/* Bandes Martini en filet décoratif */
-.martini-bars {
-  background-image: linear-gradient(
-    90deg,
-    var(--sky) 0 14%,
-    transparent 14% 28%,
-    var(--navy) 28% 42%,
-    transparent 42% 56%,
-    var(--racing) 56% 70%,
-    transparent 70% 84%,
-    var(--sky) 84% 100%
-  );
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

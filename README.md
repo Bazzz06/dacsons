@@ -1,16 +1,18 @@
 # DACSONS — site vitrine
 
-Landing one-page ultra-moderne pour **DACSONS** (conseil stratégique & financier,
-développement logiciel, expertise comptable). Inspiration livrée Martini Racing,
-fond WebGL animé qui passe du clair au sombre au scroll, transitions soignées.
+Landing one-page pour **DACSONS** (conseil stratégique & financier, développement
+logiciel, expertise comptable). Design sobre, éditorial, avec des **notes Martini
+Racing** en accents (liseré tricolore, bandes, rouge racing) sur des fonds pleins
+clair/sombre.
 
 ## Stack
 
 - **Vite** + **React 18**
-- **Three.js** via `@react-three/fiber` — shader plein écran des bandes Martini
-- **Framer Motion** — reveals, transitions, boutons magnétiques, menu mobile
+- **Framer Motion** — reveals au scroll, boutons magnétiques, menu mobile
 - **Lenis** — smooth scroll
 - **Tailwind CSS** — styles
+
+Léger : ~94 Ko gzip, aucune dépendance 3D.
 
 ## Démarrage
 
@@ -31,7 +33,7 @@ npm run preview      # sert /dist en local
 Le formulaire route vers **contact@dacsons.fr**. Deux modes :
 
 1. **Sans configuration** (par défaut) : à l'envoi, la messagerie du visiteur s'ouvre
-   pré-remplie vers `contact@dacsons.fr`. Fonctionne immédiatement, aucune clé requise.
+   pré-remplie vers `contact@dacsons.fr`. Fonctionne immédiatement.
 2. **Envoi en arrière-plan** (recommandé en prod) : via [Web3Forms](https://web3forms.com)
    (gratuit). Le visiteur ne quitte pas le site, l'email n'est pas exposé.
 
@@ -41,59 +43,42 @@ Pour activer le mode 2 :
 cp .env.example .env
 ```
 
-Puis créer une clé gratuite sur [web3forms.com](https://web3forms.com) en renseignant
-`contact@dacsons.fr`, et la coller dans `.env` :
-
-```
-VITE_WEB3FORMS_KEY=ta-cle-ici
-```
-
-Redémarrer `npm run dev`. (Une variable `VITE_*` est injectée au build : pensez à la
-définir aussi dans les variables d'environnement de votre hébergeur.)
+Créer une clé gratuite sur [web3forms.com](https://web3forms.com) avec `contact@dacsons.fr`,
+la coller dans `.env` (`VITE_WEB3FORMS_KEY=...`), puis redémarrer. (Définir aussi la
+variable côté hébergeur en prod.)
 
 ## Déploiement
 
-Site statique → déployable partout. Exemples :
-
-| Hébergeur | Build command | Output |
-|-----------|---------------|--------|
-| Vercel    | `npm run build` | `dist` |
-| Netlify   | `npm run build` | `dist` |
-
-Pensez à renseigner la variable `VITE_WEB3FORMS_KEY` côté hébergeur, et à pointer le
-domaine `dacsons.fr`.
+Site statique → déployable partout (Vercel, Netlify…). Build : `npm run build`, output : `dist`.
+Pensez à renseigner `VITE_WEB3FORMS_KEY` côté hébergeur et à pointer `dacsons.fr`.
 
 ## Personnalisation
 
-- **Couleurs Martini** : `tailwind.config.js` (`ink`, `navy`, `sky`, `racing`, `paper`)
-  et les variables CSS dans `src/index.css`. Les couleurs du shader sont dans
-  `src/components/StripesCanvas.jsx`.
+- **Couleurs Martini** : `tailwind.config.js` + variables CSS dans `src/index.css`
+  (`--paper`, `--ink`, `--navy`, `--sky`, `--racing`).
+- **Accents Martini** : classes `.martini-rule` (liseré haut de page) et `.martini-bars`
+  (eyebrows, cartes, footer) dans `src/index.css`.
+- **Fonds clair/sombre** : pilotés par `data-theme="light|dark"` sur chaque `<section>`.
 - **Contenu** : `src/components/` — `Hero`, `Expertises`, `About`, `Contact`, `Footer`.
-- **Portraits de l'équipe** : `src/components/About.jsx`. Les blocs « JC / BC / TC »
-  sont des placeholders typographiques — remplacez-les par de vraies photos (ajoutez
-  les images dans `public/` et utilisez-les dans la carte).
-- **Polices** : Clash Display (titres) + Satoshi (texte), chargées via Fontshare dans
-  `index.html`.
+- **Portraits** : `src/components/About.jsx` — les blocs « JC / BC / TC » sont des
+  placeholders ; remplacez-les par de vraies photos (images dans `public/`).
+- **Polices** : Clash Display (titres) + Satoshi (texte), via Fontshare dans `index.html`.
 
-## Accessibilité & performances
+## Accessibilité
 
-- **`prefers-reduced-motion`** respecté : animations figées, curseur désactivé,
-  shader statique.
-- **Repli sans WebGL** : si WebGL est indisponible, un fond CSS thématisé prend le
-  relais — le texte reste toujours lisible (jamais de clair sur clair).
-- Curseur d'accent désactivé sur tactile.
+- **`prefers-reduced-motion`** respecté : reveals et smooth-scroll désactivés.
+- Contrastes maîtrisés (texte sombre sur clair, clair sur sombre).
 
 ## Structure
 
 ```
 src/
-  App.jsx                 # orchestration : scroll, thème clair/sombre, loader
+  App.jsx                 # smooth scroll, loader, thème nav clair/sombre
   components/
-    StripesCanvas.jsx     # shader WebGL des bandes Martini
-    Nav.jsx  Hero.jsx  Expertises.jsx  About.jsx  Contact.jsx  Footer.jsx
-    Cursor.jsx  Loader.jsx
+    Nav.jsx  Hero.jsx  Expertises.jsx  About.jsx  Contact.jsx  Footer.jsx  Loader.jsx
     ui/  Reveal.jsx  Magnetic.jsx
-  lib/  store.js  scroll.js
+  lib/  scroll.js
+  index.css               # couleurs, accents Martini, fonds de section
 ```
 
 ---
