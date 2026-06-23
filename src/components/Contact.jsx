@@ -36,7 +36,7 @@ export default function Contact() {
     }
 
     data.append('access_key', ACCESS_KEY)
-    data.append('subject', 'Nouveau message — dacsons.fr')
+    data.append('subject', 'Nouveau message depuis dacsons.fr')
     data.append('from_name', 'Site DACSONS')
 
     setStatus('sending')
@@ -72,7 +72,7 @@ export default function Contact() {
             votre projet.
           </h2>
           <p className="mt-6 max-w-sm text-lg text-paper/70">
-            Une question, un projet, une opération ? Écrivez-nous — on vous répond vite.
+            Une question, un projet, une opération ? Écrivez-nous, on vous répond vite.
           </p>
 
           <div className="mt-10 space-y-3">
@@ -95,8 +95,8 @@ export default function Contact() {
               </h3>
               <p className="mt-3 text-paper/70">
                 {sentVia === 'mailto'
-                  ? 'Votre messagerie vient de s’ouvrir avec le message pré-rempli — il ne reste qu’à cliquer sur « Envoyer ».'
-                  : 'Merci — votre message est bien parti vers contact@dacsons.fr. Nous revenons vers vous rapidement.'}
+                  ? 'Votre messagerie vient de s’ouvrir avec le message pré-rempli, il ne reste qu’à cliquer sur « Envoyer ».'
+                  : 'Merci, votre message est bien parti vers contact@dacsons.fr. Nous revenons vers vous rapidement.'}
               </p>
               <button
                 onClick={() => {

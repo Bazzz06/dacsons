@@ -10,45 +10,27 @@ export default function Hero({ active }) {
   return (
     <section
       id="top"
-      data-theme="dark"
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-6 pb-14 pt-24 text-paper md:px-10 md:pb-20"
+      data-theme="light"
+      className="relative flex min-h-[100svh] flex-col justify-center px-6 pt-24 md:px-10"
     >
-      {/* Vidéo de fond */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover object-[center_26%]"
-        src="/hero.mp4"
-        poster="/hero-poster.png"
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden="true"
-      />
-      {/* Scrim : sombre en bas (lisibilité du wordmark), visage visible en haut */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/10"
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-ink/15" aria-hidden="true" />
-
-      <div className="relative z-10 mx-auto w-full max-w-[1400px]">
+      <div className="mx-auto w-full max-w-[1400px]">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={show}
           transition={{ delay: 0.1, duration: 0.7 }}
-          className="mb-6 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.28em] text-paper/80"
+          className="mb-7 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.28em] text-navy/70"
         >
           <span className="martini-bars h-3 w-10 rounded-sm" />
           Conseil · Finance · Logiciel
         </motion.p>
 
-        <h1 className="font-display font-semibold leading-[0.82] tracking-tightest">
+        <h1 className="font-display font-semibold leading-[0.82] tracking-tightest text-navy">
           <span className="sr-only">DACSONS</span>
           <span aria-hidden="true" className="flex">
             {letters.map((c, i) => (
               <span key={i} className="inline-block overflow-hidden">
                 <motion.span
-                  className="inline-block text-[19vw] md:text-[15vw]"
+                  className="inline-block text-[19vw] md:text-[15.5vw]"
                   initial={{ y: '115%' }}
                   animate={active ? { y: 0 } : {}}
                   transition={{ delay: 0.2 + i * 0.05, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
@@ -64,23 +46,32 @@ export default function Hero({ active }) {
           initial={{ opacity: 0, y: 16 }}
           animate={show}
           transition={{ delay: 0.75, duration: 0.8 }}
-          className="mt-7 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+          className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
         >
-          <p className="max-w-md text-lg text-paper/75 md:text-xl">
-            Cabinet familial sur la Côte d'Azur. Trois expertises qui se répondent —{' '}
-            <span className="text-paper">une même exigence.</span>
+          <p className="max-w-md text-lg text-ink/70 md:text-xl">
+            Cabinet familial sur la Côte d'Azur. Deux expertises.
           </p>
 
           <Magnetic
             as="button"
             onClick={() => scrollToId('#expertises')}
-            className="group inline-flex items-center gap-3 self-start rounded-full border border-paper/30 px-6 py-3 text-sm font-medium text-paper transition-colors duration-300 hover:border-paper/70"
+            className="group inline-flex items-center gap-3 self-start rounded-full border border-ink/20 px-6 py-3 text-sm font-medium text-ink transition-colors duration-300 hover:border-ink/50"
           >
             Découvrir
             <span className="transition-transform duration-300 group-hover:translate-y-1">↓</span>
           </Magnetic>
         </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={active ? { opacity: 1 } : {}}
+        transition={{ delay: 1.2, duration: 1 }}
+        className="pointer-events-none absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
+      >
+        <span className="text-[10px] uppercase tracking-[0.3em] text-ink/40">Scroll</span>
+        <span className="h-10 w-px animate-pulse bg-ink/30" />
+      </motion.div>
     </section>
   )
 }

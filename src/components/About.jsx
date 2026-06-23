@@ -4,7 +4,7 @@ const people = [
   {
     n: '01',
     name: 'Jacky Caillé',
-    role: 'Le père — Expert-comptable',
+    role: 'Le père, expert-comptable',
     line: 'La rigueur comptable et le sens du temps long.',
   },
   {
@@ -16,7 +16,7 @@ const people = [
   {
     n: '03',
     name: 'Théo Caillé',
-    role: 'Expert financier — Fusions-acquisitions',
+    role: 'Expert financier, fusions-acquisitions',
     line: "La finance d'entreprise et les opérations de croissance.",
   },
 ]
@@ -38,8 +38,8 @@ export default function About() {
             Une histoire familiale.
           </h2>
           <p className="mt-6 text-lg text-paper/70 md:text-xl">
-            Un père, deux fils. Trois expertises qui se répondent autour d'une même table — et d'une
-            même exigence.
+            Un père, deux fils. Des expertises qui se répondent autour d'une même table, avec une même
+            exigence.
           </p>
         </Reveal>
 

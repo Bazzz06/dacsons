@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#070A14', // near-black navy — the "sombre" end
+        ink: '#070A14', // near-black navy, the "sombre" end
         navy: '#16244D', // martini deep blue
         sky: '#5BC3EF', // martini light blue
         racing: '#E11D2A', // martini red
-        paper: '#F3F2EE', // warm off-white — the "clair" end
+        paper: '#F3F2EE', // warm off-white, the "clair" end
       },
       fontFamily: {
         display: ['"Clash Display"', 'system-ui', 'sans-serif'],

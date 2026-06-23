@@ -11,11 +11,6 @@ const items = [
     title: 'Développement logiciel',
     desc: "Produits sur mesure, plateformes et automatisations. De l'idée au déploiement, sans intermédiaire.",
   },
-  {
-    n: '03',
-    title: 'Expertise comptable',
-    desc: "Comptabilité, fiscalité et conseil. La rigueur d'un cabinet, la proximité d'une famille.",
-  },
 ]
 
 export default function Expertises() {
@@ -25,7 +20,7 @@ export default function Expertises() {
         <Reveal className="mb-14 flex items-end justify-between gap-6 md:mb-20">
           <h2 className="font-display text-4xl tracking-tightest text-ink md:text-6xl">Expertises</h2>
           <p className="hidden max-w-[16rem] text-right text-sm text-ink/55 md:block">
-            Trois métiers, un seul interlocuteur. La cohérence d'une famille.
+            Deux métiers, un seul interlocuteur. La cohérence d'une famille.
           </p>
         </Reveal>
 
