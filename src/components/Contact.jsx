@@ -168,6 +168,18 @@ export default function Contact() {
                 {status === 'sending' ? 'Envoi…' : 'Envoyer le message'}
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Magnetic>
+
+              <p className="text-xs leading-relaxed text-paper/40">
+                En envoyant ce message, vous acceptez que vos données soient utilisées pour vous
+                recontacter.{' '}
+                <a
+                  href="/mentions-legales.html"
+                  className="underline-offset-2 hover:text-sky hover:underline"
+                >
+                  Mentions légales
+                </a>
+                .
+              </p>
             </form>
           )}
         </Reveal>

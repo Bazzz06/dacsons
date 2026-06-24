@@ -5,18 +5,21 @@ const people = [
     n: '01',
     name: 'Jacky Caillé',
     role: 'Le père, expert-comptable',
+    years: '35+',
     line: 'La rigueur comptable et le sens du temps long.',
   },
   {
     n: '02',
     name: 'Basile Caillé',
     role: 'Consultant & expert logiciel',
+    years: '10+',
     line: "Le conseil et la technologie, au service de l'exécution.",
   },
   {
     n: '03',
     name: 'Théo Caillé',
     role: 'Expert financier, fusions-acquisitions',
+    years: '10+',
     line: "La finance d'entreprise et les opérations de croissance.",
   },
 ]
@@ -38,8 +41,8 @@ export default function About() {
             Une histoire familiale.
           </h2>
           <p className="mt-6 text-lg text-paper/70 md:text-xl">
-            Un père, deux fils. Des expertises qui se répondent autour d'une même table, avec une même
-            exigence.
+            Un père, deux fils, et plus de 55 ans d'expérience cumulée. Des expertises qui se
+            répondent autour d'une même table, avec une même exigence.
           </p>
         </Reveal>
 
@@ -53,7 +56,11 @@ export default function About() {
                 </div>
                 <h3 className="font-display text-2xl">{p.name}</h3>
                 <p className="mt-1.5 text-sm text-sky">{p.role}</p>
-                <p className="mt-3 text-sm text-paper/55">{p.line}</p>
+                <p className="mt-5 flex items-baseline gap-2">
+                  <span className="font-display text-4xl text-paper">{p.years}</span>
+                  <span className="text-sm text-paper/50">ans d'expérience</span>
+                </p>
+                <p className="mt-4 text-sm text-paper/55">{p.line}</p>
               </article>
             </Reveal>
           ))}

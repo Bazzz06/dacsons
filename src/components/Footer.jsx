@@ -56,7 +56,12 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col gap-2 border-t border-paper/10 pt-6 text-xs text-paper/40 md:flex-row md:items-center md:justify-between">
           <p>DACSONS · SAS au capital de 1 000 € · SIREN 893 343 871</p>
-          <p>© {year} DACSONS</p>
+          <div className="flex items-center gap-4">
+            <a href="/mentions-legales.html" className="transition-colors hover:text-sky">
+              Mentions légales
+            </a>
+            <span>© {year} DACSONS</span>
+          </div>
         </div>
       </div>
     </footer>
