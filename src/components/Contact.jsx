@@ -2,7 +2,9 @@ import { useState } from 'react'
 import Reveal from './ui/Reveal'
 import Magnetic from './ui/Magnetic'
 
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
+// FormSubmit.co : gratuit, sans compte, livre vers l'adresse indiquee.
+// 1re soumission => email d'activation a confirmer une seule fois sur contact@dacsons.fr.
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/contact@dacsons.fr'
 
 const inputClass =
   'w-full rounded-lg border border-paper/20 bg-paper/[0.05] px-4 py-3.5 text-paper placeholder-paper/40 outline-none transition-colors duration-300 focus:border-sky focus:bg-paper/[0.08]'
@@ -10,42 +12,31 @@ const inputClass =
 export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [error, setError] = useState('')
-  const [sentVia, setSentVia] = useState(null) // 'web3forms' | 'mailto'
 
   const onSubmit = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
 
-    if (data.get('botcheck')) return // honeypot
-
-    const name = data.get('name')
-    const email = data.get('email')
-    const message = data.get('message')
-
-    // Sans clé Web3Forms : repli direct sur le client mail (vers contact@dacsons.fr).
-    if (!ACCESS_KEY) {
-      const body = `Nom : ${name}\nEmail : ${email}\n\n${message}`
-      window.location.href = `mailto:contact@dacsons.fr?subject=${encodeURIComponent(
-        'Contact via dacsons.fr',
-      )}&body=${encodeURIComponent(body)}`
-      setSentVia('mailto')
-      setStatus('success')
-      form.reset()
-      return
-    }
-
-    data.append('access_key', ACCESS_KEY)
-    data.append('subject', 'Nouveau message depuis dacsons.fr')
-    data.append('from_name', 'Site DACSONS')
+    if (data.get('_honey')) return // honeypot anti-spam
 
     setStatus('sending')
     setError('')
     try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          message: data.get('message'),
+          _subject: 'Nouveau message depuis dacsons.fr',
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      })
       const json = await res.json()
-      if (json.success) {
-        setSentVia('web3forms')
+      if (json.success === true || json.success === 'true') {
         setStatus('success')
         form.reset()
       } else {
@@ -54,7 +45,7 @@ export default function Contact() {
       }
     } catch {
       setStatus('error')
-      setError('Réseau indisponible. Réessaie ou écris-nous directement.')
+      setError('Réseau indisponible. Réessaie ou écris-nous à contact@dacsons.fr.')
     }
   }
 
@@ -75,7 +66,7 @@ export default function Contact() {
             Une question, un projet, une opération ? Écrivez-nous, on vous répond vite.
           </p>
 
-          <div className="mt-10 space-y-3">
+          <div className="mt-10">
             <a
               href="mailto:contact@dacsons.fr"
               className="block font-display text-2xl transition-colors hover:text-sky md:text-3xl"
@@ -89,19 +80,13 @@ export default function Contact() {
           {status === 'success' ? (
             <div className="flex h-full min-h-[18rem] flex-col items-start justify-center rounded-2xl border border-sky/30 bg-sky/[0.06] p-8">
               <span className="martini-bars mb-5 h-3 w-12 rounded-sm" />
-              <h3 className="font-display text-3xl">
-                {sentVia === 'mailto' ? 'Presque envoyé !' : 'Message envoyé.'}
-              </h3>
+              <h3 className="font-display text-3xl">Message envoyé.</h3>
               <p className="mt-3 text-paper/70">
-                {sentVia === 'mailto'
-                  ? 'Votre messagerie vient de s’ouvrir avec le message pré-rempli, il ne reste qu’à cliquer sur « Envoyer ».'
-                  : 'Merci, votre message est bien parti vers contact@dacsons.fr. Nous revenons vers vous rapidement.'}
+                Merci, votre message est bien parti vers contact@dacsons.fr. Nous revenons vers vous
+                rapidement.
               </p>
               <button
-                onClick={() => {
-                  setStatus('idle')
-                  setSentVia(null)
-                }}
+                onClick={() => setStatus('idle')}
                 className="mt-6 text-sm text-sky underline-offset-4 hover:underline"
               >
                 Envoyer un autre message
@@ -112,14 +97,8 @@ export default function Contact() {
               onSubmit={onSubmit}
               className="flex flex-col gap-5 rounded-2xl border border-paper/10 bg-paper/[0.02] p-6 md:p-8"
             >
-              {/* honeypot anti-spam */}
-              <input
-                type="checkbox"
-                name="botcheck"
-                tabIndex={-1}
-                autoComplete="off"
-                className="hidden"
-              />
+              {/* honeypot anti-spam (FormSubmit) */}
+              <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" />
 
               <div>
                 <label htmlFor="name" className="mb-2 block text-xs uppercase tracking-[0.2em] text-paper/60">
