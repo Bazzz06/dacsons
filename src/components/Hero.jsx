@@ -67,8 +67,7 @@ export default function Hero({ active }) {
           className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
         >
           <p className="max-w-lg text-lg text-paper/75 md:text-xl">
-            Cabinet familial sur la Côte d'Azur. Le conseil stratégique et la technologie au service
-            de votre croissance.
+            Cabinet familial sur la Côte d'Azur.
           </p>
 
           <Magnetic

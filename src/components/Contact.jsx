@@ -7,7 +7,7 @@ import Magnetic from './ui/Magnetic'
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/contact@dacsons.fr'
 
 const inputClass =
-  'w-full rounded-lg border border-paper/20 bg-paper/[0.05] px-4 py-3.5 text-paper placeholder-paper/40 outline-none transition-colors duration-300 focus:border-sky focus:bg-paper/[0.08]'
+  'w-full rounded-lg border border-ink/15 bg-white px-4 py-3.5 text-ink placeholder-ink/35 outline-none transition-all duration-300 focus:border-navy focus:ring-2 focus:ring-sky/40'
 
 export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | success | error
@@ -51,116 +51,118 @@ export default function Contact() {
 
   return (
     <section id="contact" data-theme="dark" className="relative px-6 py-28 text-paper md:px-10 md:py-40">
-      <div className="mx-auto grid max-w-[1400px] gap-14 md:grid-cols-2 md:gap-20">
+      <div className="mx-auto max-w-[1400px]">
         <Reveal>
-          <p className="mb-5 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.28em] text-sky">
-            <span className="martini-bars h-3 w-10 rounded-sm" />
-            Contact
-          </p>
-          <h2 className="font-display text-4xl leading-[1.04] tracking-tightest md:text-6xl">
-            Parlons de
-            <br />
-            votre projet.
-          </h2>
-          <p className="mt-6 max-w-sm text-lg text-paper/70">
-            Une question, un projet, une opération ? Écrivez-nous, on vous répond vite.
-          </p>
+          {/* Panneau clair sur fond sombre */}
+          <div className="relative overflow-hidden rounded-3xl bg-paper p-7 text-ink shadow-[0_40px_120px_rgba(0,0,0,0.5)] md:p-16">
+            <div className="martini-rule absolute inset-x-0 top-0 h-[5px]" aria-hidden="true" />
 
-          <div className="mt-10">
-            <a
-              href="mailto:contact@dacsons.fr"
-              className="block font-display text-2xl transition-colors hover:text-sky md:text-3xl"
-            >
-              contact@dacsons.fr
-            </a>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          {status === 'success' ? (
-            <div className="flex h-full min-h-[18rem] flex-col items-start justify-center rounded-2xl border border-sky/30 bg-sky/[0.06] p-8">
-              <span className="martini-bars mb-5 h-3 w-12 rounded-sm" />
-              <h3 className="font-display text-3xl">Message envoyé.</h3>
-              <p className="mt-3 text-paper/70">
-                Merci, votre message est bien parti vers contact@dacsons.fr. Nous revenons vers vous
-                rapidement.
-              </p>
-              <button
-                onClick={() => setStatus('idle')}
-                className="mt-6 text-sm text-sky underline-offset-4 hover:underline"
-              >
-                Envoyer un autre message
-              </button>
-            </div>
-          ) : (
-            <form
-              onSubmit={onSubmit}
-              className="flex flex-col gap-5 rounded-2xl border border-paper/10 bg-paper/[0.02] p-6 md:p-8"
-            >
-              {/* honeypot anti-spam (FormSubmit) */}
-              <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" />
-
+            <div className="grid gap-12 md:grid-cols-2 md:gap-20">
               <div>
-                <label htmlFor="name" className="mb-2 block text-xs uppercase tracking-[0.2em] text-paper/60">
-                  Nom
-                </label>
-                <input id="name" name="name" type="text" required placeholder="Votre nom" className={inputClass} />
-              </div>
+                <p className="mb-5 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.28em] text-navy/70">
+                  <span className="martini-bars h-3 w-10 rounded-sm" />
+                  Contact
+                </p>
+                <h2 className="font-display text-4xl leading-[1.04] tracking-tightest text-navy md:text-6xl">
+                  Parlons de
+                  <br />
+                  votre projet.
+                </h2>
+                <p className="mt-6 max-w-sm text-lg text-ink/70">
+                  Une question, un projet, une opération ? Écrivez-nous, on vous répond vite.
+                </p>
 
-              <div>
-                <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-[0.2em] text-paper/60">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="vous@exemple.com"
-                  className={inputClass}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="mb-2 block text-xs uppercase tracking-[0.2em] text-paper/60">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={4}
-                  placeholder="Quelques mots sur votre besoin…"
-                  className={`${inputClass} resize-none`}
-                />
-              </div>
-
-              {status === 'error' && <p className="text-sm text-racing">{error}</p>}
-
-              <Magnetic
-                as="button"
-                type="submit"
-                strength={0.25}
-                disabled={status === 'sending'}
-                className="group mt-2 inline-flex w-fit items-center gap-3 rounded-full bg-paper px-7 py-3.5 text-sm font-medium text-ink transition-opacity duration-300 hover:opacity-90 disabled:opacity-60"
-              >
-                {status === 'sending' ? 'Envoi…' : 'Envoyer le message'}
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </Magnetic>
-
-              <p className="text-xs leading-relaxed text-paper/40">
-                En envoyant ce message, vous acceptez que vos données soient utilisées pour vous
-                recontacter.{' '}
                 <a
-                  href="/mentions-legales.html"
-                  className="underline-offset-2 hover:text-sky hover:underline"
+                  href="mailto:contact@dacsons.fr"
+                  className="mt-9 inline-block border-b-[3px] border-racing pb-1 font-display text-2xl tracking-tightest text-ink transition-colors hover:text-racing md:text-3xl"
                 >
-                  Mentions légales
+                  contact@dacsons.fr
                 </a>
-                .
-              </p>
-            </form>
-          )}
+              </div>
+
+              {status === 'success' ? (
+                <div className="flex min-h-[18rem] flex-col items-start justify-center rounded-2xl border border-navy/15 bg-navy/[0.04] p-8">
+                  <span className="martini-bars mb-5 h-3 w-12 rounded-sm" />
+                  <h3 className="font-display text-3xl text-navy">Message envoyé.</h3>
+                  <p className="mt-3 text-ink/70">
+                    Merci, votre message est bien parti vers contact@dacsons.fr. Nous revenons vers
+                    vous rapidement.
+                  </p>
+                  <button
+                    onClick={() => setStatus('idle')}
+                    className="mt-6 text-sm text-navy underline-offset-4 hover:underline"
+                  >
+                    Envoyer un autre message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={onSubmit} className="flex flex-col gap-5">
+                  {/* honeypot anti-spam (FormSubmit) */}
+                  <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" />
+
+                  <div>
+                    <label htmlFor="name" className="mb-2 block text-xs uppercase tracking-[0.2em] text-ink/55">
+                      Nom
+                    </label>
+                    <input id="name" name="name" type="text" required placeholder="Votre nom" className={inputClass} />
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-[0.2em] text-ink/55">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="vous@exemple.com"
+                      className={inputClass}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="mb-2 block text-xs uppercase tracking-[0.2em] text-ink/55">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={4}
+                      placeholder="Quelques mots sur votre besoin…"
+                      className={`${inputClass} resize-none`}
+                    />
+                  </div>
+
+                  {status === 'error' && <p className="text-sm text-racing">{error}</p>}
+
+                  <Magnetic
+                    as="button"
+                    type="submit"
+                    strength={0.25}
+                    disabled={status === 'sending'}
+                    className="group mt-1 inline-flex w-fit items-center gap-3 rounded-full bg-racing px-7 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:shadow-[0_12px_30px_rgba(225,29,42,0.35)] disabled:opacity-60"
+                  >
+                    {status === 'sending' ? 'Envoi…' : 'Envoyer le message'}
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </Magnetic>
+
+                  <p className="text-xs leading-relaxed text-ink/45">
+                    En envoyant ce message, vous acceptez que vos données soient utilisées pour vous
+                    recontacter.{' '}
+                    <a
+                      href="/mentions-legales.html"
+                      className="underline-offset-2 hover:text-navy hover:underline"
+                    >
+                      Mentions légales
+                    </a>
+                    .
+                  </p>
+                </form>
+              )}
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>

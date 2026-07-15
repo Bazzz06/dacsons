@@ -5,6 +5,7 @@ import Lenis from 'lenis'
 import Loader from './components/Loader'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import Manifesto from './components/Manifesto'
 import Expertises from './components/Expertises'
 import About from './components/About'
 import Contact from './components/Contact'
@@ -102,6 +103,7 @@ export default function App() {
 
       <main>
         <Hero active={loaded} />
+        <Manifesto />
         <Expertises />
         <About />
         <Contact />

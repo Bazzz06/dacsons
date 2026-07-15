@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import Reveal from './ui/Reveal'
 
 const items = [
@@ -14,9 +15,36 @@ const items = [
 ]
 
 export default function Expertises() {
+  const wmRef = useRef(null)
+
+  // Filigrane geant en parallax leger derriere la section.
+  useEffect(() => {
+    const el = wmRef.current
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let raf
+    const tick = () => {
+      const r = el.parentElement.getBoundingClientRect()
+      el.style.transform = `translateY(${(r.top / window.innerHeight) * 90}px)`
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [])
+
   return (
-    <section id="expertises" data-theme="light" className="relative px-6 py-28 md:px-10 md:py-40">
-      <div className="mx-auto max-w-[1400px]">
+    <section
+      id="expertises"
+      data-theme="light"
+      className="relative overflow-hidden px-6 py-28 md:px-10 md:py-40"
+    >
+      <div
+        ref={wmRef}
+        aria-hidden="true"
+        className="watermark pointer-events-none absolute -right-8 top-6 select-none whitespace-nowrap font-display text-[26vw] font-semibold leading-none tracking-tightest"
+      >
+        DACSONS
+      </div>
+      <div className="relative mx-auto max-w-[1400px]">
         <Reveal className="mb-14 flex items-end justify-between gap-6 md:mb-20">
           <h2 className="font-display text-4xl tracking-tightest text-ink md:text-6xl">Expertises</h2>
           <p className="hidden max-w-[16rem] text-right text-sm text-ink/55 md:block">

@@ -1,25 +1,26 @@
 import Reveal from './ui/Reveal'
+import Counter from './ui/Counter'
 
 const people = [
   {
     n: '01',
     name: 'Jacky Caillé',
     role: 'Le père, expert-comptable',
-    years: '35+',
+    years: 35,
     line: 'La rigueur comptable et le sens du temps long.',
   },
   {
     n: '02',
     name: 'Basile Caillé',
     role: 'Consultant & expert logiciel',
-    years: '10+',
+    years: 10,
     line: "Le conseil et la technologie, au service de l'exécution.",
   },
   {
     n: '03',
     name: 'Théo Caillé',
     role: 'Expert financier, fusions-acquisitions',
-    years: '10+',
+    years: 10,
     line: "La finance d'entreprise et les opérations de croissance.",
   },
 ]
@@ -41,8 +42,19 @@ export default function About() {
             Une histoire familiale.
           </h2>
           <p className="mt-6 text-lg text-paper/70 md:text-xl">
-            Un père, deux fils, et plus de 55 ans d'expérience cumulée. Des expertises qui se
-            répondent autour d'une même table, avec une même exigence.
+            Un père, deux fils. Des expertises qui se répondent autour d'une même table, avec une
+            même exigence.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.1} className="mb-16 md:mb-24">
+          <p className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+            <span className="font-display text-8xl leading-none tracking-tightest text-paper md:text-[11rem]">
+              <Counter to={55} />+
+            </span>
+            <span className="max-w-[220px] text-base leading-snug text-paper/55 md:text-lg">
+              années d'expérience cumulée au service de votre croissance
+            </span>
           </p>
         </Reveal>
 
@@ -57,7 +69,9 @@ export default function About() {
                 <h3 className="font-display text-2xl">{p.name}</h3>
                 <p className="mt-1.5 text-sm text-sky">{p.role}</p>
                 <p className="mt-5 flex items-baseline gap-2">
-                  <span className="font-display text-4xl text-paper">{p.years}</span>
+                  <span className="font-display text-4xl text-paper">
+                    <Counter to={p.years} />+
+                  </span>
                   <span className="text-sm text-paper/50">ans d'expérience</span>
                 </p>
                 <p className="mt-4 text-sm text-paper/55">{p.line}</p>
